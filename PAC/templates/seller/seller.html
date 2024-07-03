@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+<style>
+.gap{
+ background-image :url("https://i.ibb.co/vQ6qgq5/brickwhite.jpg");
+  background-size:cover;
+  height:100vh;
+  width:100vw;
+}
+.fon
+{
+	font-size:25px;
+	font-family:Roboto;
+}
+</style>
+<body>
+<div class="d-flex flex-column justify-content-center gap ">
+<div> <center>
+    <h1>Welocome to Seller Page</h1>
+    {% if flag == 1 %}
+     <p> <h3 class="fon">Your Shop registration was successfull. Your Shop ID is</h3><h2><u>{{sid}}</u></h2><h3 class="fon">. Kindly note it for future purposes where you need your shop id to handle your shop page.</h3></p>
+    {% endif %}
+    <form action="/takein/" method="POST">
+        {% csrf_token %}
+        <p>
+        <label class="m-2 fon">Enter Shop Id :</label>
+        <input type="text" placeholder="Enter Id here" name="sid" id="sid">
+        <br>
+        <label class="fon">How many products: </label>
+        <input type="number" name="n" id="n">
+        <br>
+        <input type="button" class="btn btn-primary" value="proceed" id="proceed"></p>
+        <p id="out"></p>
+    </form>
+</center>
+</div>
+</div>
+ <script> 
+  function load()
+  { n=document.getElementById("n");
+    n=parseInt(n.value);
+    var i=0,st="";
+    for(i=1;i<=n;i++)
+    { st=st+"<p><label>Enter Product Id : </label><input name=p"+i+" type='text'><br><label>Enter Product Name : </label><input name=pn"+i+"><br><label>Enter the Quantity : </label><input type='number' name=q"+i+"><br></p>";}
+    st+="<input type='submit' class='btn btn-primary'>";
+    p=document.getElementById("out");
+    p.innerHTML=st}
+  b=document.getElementById("proceed");
+  b.addEventListener("click",load,false);
+ </script>
+</body>	
+
+</html>
+
